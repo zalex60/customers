@@ -62,3 +62,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+////************************Configuracion general del sistema********************************////
+1.- Correr composer install para instalar todas las dependencias del proyecto.
+2.- Configurar nuestro .env agregar el nombre de nuestra base de datos y los datos para su respectiva conexion.
+3.- Ejecutar php artisan key:generate para generar nuestra ket del proyecto.
+4.- Correr las migraciones correspondientes php artisan migrate
+5.- Se crearon seeders con datos de prueba ejecutar php artisan db:seed
+6.- se creara un usuario de prueba email: admin@admin.com ´password: admin
+7.- con postman o en donde donsumamos nuestra api ya podemos ingresar al sistema.
+////********************************************************************************////

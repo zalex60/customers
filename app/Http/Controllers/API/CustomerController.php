@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use Validator,DB;   
+use DB;   
 use Carbon\Carbon;
 use App\Http\Requests;/*Route for client requests*/
 use Illuminate\Http\Request;
@@ -51,6 +51,7 @@ class CustomerController extends BaseController
     //Returns the user's data according to their ID or email
     public function show(Request $request, $column)
     {
+        //a union of the clients, regions and common tables is performed. Only the data indicated in the requirements are selected
         $customers= Customer::join('regions','customers.id_reg','=','regions.id_reg')
         ->join('communes','communes.id_com','=','customers.id_com')
         ->where('customers.status','A')
@@ -62,17 +63,18 @@ class CustomerController extends BaseController
         return [CustomerResource::collection($customers),'success'=>true];
     }
    
-
+    //Delete the client logically
     public function destroy($dni)
     {
+        //check that the client exists   
         if (Customer::where('dni',$dni)->exists()) {
             if (Customer::find($dni)->delete()) {
                 return ['success'=>true,'message'=>'Client removed successfully'];
             }else{
-                return ['success'=>false,'message'=>'Error'];
+                return ['success'=>false,'message'=>'Registro no existe'];
             }  
         }else{
-            return ['success'=>false,'message'=>'Error. no existe'];
+            return ['success'=>false,'message'=>'Registro no existe'];
         }
         
     }
